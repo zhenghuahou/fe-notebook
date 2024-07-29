@@ -49,10 +49,15 @@ git reset --hard HEAD^
 `检出分支`
 
 ```bash
-# 方法一: 从远端origin/dev 检出本地分支local，并自动跟踪远端origin/dev分支
+# 方法一 :
+# To not track the remote 从远端bar分支检出本地分支foo,但是foo分支不跟踪远端bar分支
+git checkout -b foo --no-track origin/bar
+
+# 方法二: 从远端origin/dev 检出本地分支local，并自动跟踪远端origin/dev分支
+#To track the remote:
 git checkout -b local  origin/dev
 
-# 方法二: 从远端`feature/leap`分支检出本地`local`分支，但是不自动跟踪远端`feature/leap`分支
+# 方法三: 从远端`feature/leap`分支检出本地`local`分支，但是不自动跟踪远端`feature/leap`分支
 # Ps：使用该方式会在本地新建分支x，但是不会自动切换到该本地分支x，需要手动checkout；采用此种方法建立的本地分支不会和远程分支建立映射关系
 git fetch origin feature/leap:local
 
@@ -71,6 +76,7 @@ git branch -vv
 
 ```bash
 # 将本地分支与远程分支关联 ，远程也会新建一个分支 feature/add_order
+# 如果当前本地分支已经有关联的远端分支，先执行`git branch --unset-upstream`撤销和以前分支的关联状态
 git push --set-upstream origin feature/add_order
 ```
 
