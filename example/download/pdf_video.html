@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="avatar">**111**Choose a profile picture(application/pdf):</label>
+
+    <input
+      type="file"
+      id="avatar"
+      name="avatar"
+      accept="application/pdf"
+    />
+     <br>
+
+    <label for="avatar">**6666**Choose a profile picture(image/*,application/pdf):</label>
+
+    <input type="file" accept="image/*,application/pdf" />
+    <br>
+    application/pdf,image/*
+    <input type="file" accept="application/pdf,image/*" />
+
+    <br>
+    <label for="avatar">Choose a video (video/*):</label>
+    <input
+    type="file"
+    id="video"
+    name="video"
+    accept="video/*"/>
+
+    <br>
+    <label for="avatar">Choose  all (no accept):</label>
+    <input
+    type="file"
+    id="videox"
+    name="videox"
+    accept=""
+    
+   />
+
+   <br />
+   <textarea  id="textarea"></textarea>
+
+   <script>
+    document.getElementById('textarea').oninput = function(aa){
+      console.info(' aa:',aa)
+    }
+   </script>
+  
+   
+  </body>
+</html>

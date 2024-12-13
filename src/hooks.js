@@ -79,3 +79,22 @@ export const useOnDemandDataHook = () => {
     );
   }, []);
 };
+
+
+
+
+const  common = async ()=>{
+  console.info('before  a!');
+  let  a=  await Promise.reject('11');
+  console.info('after a!');
+     // return a;
+ }
+
+ const test =  async ()=>{
+  console.info('11!');
+  window.rr2 = await common();
+  console.info('22!');
+
+ }
+
+ test();

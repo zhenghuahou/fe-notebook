@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>upload-img</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>
+        <a href="/download/upload-img.html?t=1">refresh</a>
+        <button id="btn">刷新页面</button>
+      </p>
+      <input
+        type="file"
+        id="upload"
+        ref="catchRef"
+        accept="image/*"
+        capture="user"
+      />
+      <br />
+      <div>下面是图片展示</div>
+      <br />
+      <img alt="图片预览" id="img" style="width: 200px" />
+      <br />
+      <p>图片预览2:</p>
+      <img alt="图片预览" id="img2" style="width: 200px" />
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script>
+    <script>
+      // 初始化
+      // var vConsole = new VConsole();
+    </script>
+    <script src="./module/useImageCatch.js"></script>
+    <script>
+      const {
+        catchRef,
+        fileDom,
+        base64Data,
+        commonImageCatch,
+        commonImageCatchByEncode,
+      } = useImageCatch();
+      const onCatch = async () => {
+        const base64Str0 = await commonImageCatch();
+        const imgEle = document.getElementById("img");
+        const img2Ele = document.getElementById("img2");
+        console.log("[onCatch] base64Str0===", base64Str0);
+        img.src = BASE64_HEADER + base64Str0;
+        const base64Str1 = await commonImageCatchByEncode();
+        img2Ele.src = BASE64_HEADER + base64Str1;
+      };
+
+      fileDom && fileDom.addEventListener("change", onCatch);
+
+      const btnDom = document.getElementById("btn");
+      btnDom &&
+        btnDom.addEventListener("click", () => {
+          location.reload();
+        });
+    </script>
+  </body>
+</html>
