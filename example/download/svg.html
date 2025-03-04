@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body
+       {
+        height: 100%;
+      }
+
+      svg {
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg
+      viewBox="0 0 10 10"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient id="myGradient" gradientTransform="rotate(0)">
+          <stop offset="5%" stop-color="yellow" />
+          <stop offset="95%" stop-color="red" />
+        </linearGradient>
+      </defs>
+
+      <!-- using my linear gradient -->
+      <circle cx="5" cy="5" r="4" fill="url('#myGradient')" />
+    </svg>
+
+    --->
+    <svg
+    viewBox="0 0 10 10"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <defs>
+      <linearGradient id="myGradient2"  gradientTransform="rotate(30)">
+        <stop offset="5%" stop-color="yellow" />
+        <stop offset="95%" stop-color="red" />
+      </linearGradient>
+    </defs>
+
+    <!-- using my linear gradient -->
+    <circle cx="5" cy="5" r="4" fill="url('#myGradient2')" />
+  </svg>
+  </body>
+</html>

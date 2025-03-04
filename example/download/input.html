@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="avatar"
+      >Choose a profile picture(application/pdf):</label
+    >
+    <input type="file" id="avatar" name="avatar" accept="application/pdf" />
+    <br />
+    application/pdf,image/*
+    <input type="file" accept="application/pdf,image/*" multiple />
+    <br/>
+    --------<label for="avatar">image/* </label>
+    <input type="file" accept="image/*"  multiple />
+    <br/>
+    --------<label for="avatar">.bmp/.gif</label>
+    <input type="file" accept=".bmp,.gif"  multiple />
+  </body>
+</html>

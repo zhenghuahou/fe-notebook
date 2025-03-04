@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      svg {
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg
+      viewBox="0 0 10 10"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient id="myGradient" gradientTransform="rotate(0)">
+          <stop offset="5%" stop-color="yellow" />
+          <stop offset="95%" stop-color="red" />
+        </linearGradient>
+      </defs>
+
+      <!-- using my linear gradient -->
+      <circle cx="5" cy="5" r="4" fill="url('#myGradient')" />
+    </svg>
+
+    <svg
+      viewBox="0 0 10 10"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient id="myGradient2" gradientTransform="rotate(30)">
+          <stop offset="5%" stop-color="yellow" />
+          <stop offset="95%" stop-color="red" />
+        </linearGradient>
+      </defs>
+
+      <!-- using my linear gradient -->
+      <circle cx="5" cy="5" r="4" fill="url('#myGradient2')" />
+    </svg>
+
+    <!-- <script
+  type="text/javascript"
+  src="https://macch.abchina.com.cn/mapback/mapApi/api?v=3.0&ak=3262167aa2bc829857278356f789dcfe&entrance=macch.abchina.com.cn&scheme=https"
+></script> -->
+    <!-- <script>
+  // 在非内网环境加载地理位置JS插件
+  if (!window.location.hostname.includes('mssm.arm-dev.test.abc')) {
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://macch.abchina.com.cn/mapback/mapApi/api?v=3.0&ak=3262167aa2bc829857278356f789dcfe&entrance=macch.abchina.com.cn&scheme=https';
+    document.body.appendChild(script);
+  }
+</script> -->
+
+<script>
+  (function(){
+    window.BMAP_PROTOCOL='https';
+    window.BMAP_loadScriptTime =(new Date).getTime();
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://macch.abchina.com.cn/mapback/mapApi/getscript?scheme=https&entrance=macch.abchina.com.cn&v=3.0&ak=3262167aa2bc829857278356f789dcfe&services=&t=20250113173049';
+    document.body.appendChild(script);
+    // document.getElementsByTagName("head")[0].appendChild(script);
+})();
+</script> 
+  </body>
+</html>
+
+
+(function() {
+  window.BMAP_PROTOCOL = "https";
+  window.BMap_loadScriptTime = (new Date).getTime();
+  document.write('<script type="text/javascript" src="https://macch.abchina.com.cn/mapback/mapApi/getscript?scheme=https&entrance=macch.abchina.com.cn&v=3.0&ak=3262167aa2bc829857278356f789dcfe&services=&t=20250113173049"></script>');
+}
+)();

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>media</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      svg {
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // 开始录制
+      function startRecording(stream, lengthInMS) {
+        recorder = new MediaRecorder(stream, {
+          //因为视频和音频分开录制这里直接注释了
+          // audioBitsPerSecond: 128000, // 音频码率
+          bitsPerSecond: 1843200, // 视频码率
+          mimeType: "video/webm", // 编码格式
+        });
+        recorder.ondataavailable = (event) => {
+          let data = event.data;
+          dataChunks.push(data);
+        };
+        recorder.start(1000);
+        console.log(recorder.state + " start to recording .....");
+      }
+
+      //访问用户媒体设备的兼容方法
+      const getUserMedia = (constraints, success, error) => {
+        if (navigator.mediaDevices.getUserMedia) {
+          //最新的标准API
+          navigator.mediaDevices
+            .getUserMedia(constraints)
+            .then(success)
+            .catch(error);
+          var supportedConstraints =
+            navigator.mediaDevices.getSupportedConstraints();
+          console.log("supportedConstraints", supportedConstraints);
+        } else if (navigator.webkitGetUserMedia) {
+          //webkit核心浏览器
+          navigator.webkitGetUserMedia(constraints, success, error);
+        } else if (navigator.mozGetUserMedia) {
+          //firfox浏览器
+          navigator.mozGetUserMedia(constraints, success, error);
+        } else if (navigator.getUserMedia) {
+          //旧版API
+          navigator.getUserMedia(constraints, success, error);
+        }
+      };
+
+      const Start = () => {
+        if (
+          navigator.mediaDevices.getUserMedia ||
+          navigator.getUserMedia ||
+          navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia
+        ) {
+          startTime.value = new Date().getTime();
+          //调用用户媒体设备, 访问摄像头
+          getUserMedia(
+            {
+              video: {
+                width: { ideal: 1280, max: 1280 },
+                height: { ideal: 720, max: 720 },
+                facingMode: { exact: "environment" }, // 设置前后摄像头
+                frameRate: { ideal: 30, max: 30 }, // 设置帧数
+                torch: true,
+              },
+            },
+            success,
+            error
+          );
+        } else {
+          alert("不支持访问用户媒体");
+        }
+      };
+    </script>
+  </body>
+</html>

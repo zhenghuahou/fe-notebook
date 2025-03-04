@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css圆弧进度条</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        width: 500px;
+        height: 250px;
+        box-sizing: border-box;
+        background-color: tomato;
+        border-top-left-radius: 50% 100%;
+        border-top-right-radius: 50% 100%;
+      }
+
+      .container2 {
+        width: 500px;
+        height: 250px;
+        box-sizing: border-box;
+        border-top-left-radius: 50% 100%;
+        border-top-right-radius: 50% 100%;
+        border: 25px solid tomato;
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <div class="container2"></div>
+  </body>
+</html>

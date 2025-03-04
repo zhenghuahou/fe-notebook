@@ -25,7 +25,7 @@ type Bird = {
 export type AnimalMap = {
   [EAnimalType.dog]: Dog;
   [EAnimalType.cat]: Cat;
-  [EAnimalType.bird]: Bird;
+  [EAnimalType.bird]: boolean;
 };
 
 export type IAnimalExtra<T extends EAnimalType> = {
@@ -42,6 +42,13 @@ export type IAnimal<T extends EAnimalType> = IAnimalExtra<T> & {
   type: T; // 类型
 };
 
+type AAA = {
+  [k in keyof AnimalMap]:AnimalMap[k]
+}
+
+type AAA2 = {
+  [k in keyof AnimalMap]:[AnimalMap[k]]
+}
 /**
  * 定义一个工厂，用来创建具体动物的实例
  * @returns 返回动物的实例
@@ -183,3 +190,10 @@ async function fetchData(): Promise<string> {
 type Huazi = typeof fetchData;
 type Huazi2 = ReturnType<typeof fetchData>;
 type FetchedDataType = PromiseType<ReturnType<typeof fetchData>>; // FetchedDataType is inferred as 'string'
+
+
+
+let num:number | string | null | undefined;
+
+// const aa  = '1';
+const aa = null;

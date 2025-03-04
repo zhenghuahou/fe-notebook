@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        -webkit-text-size-adjust: 100% !important;
+        -moz-text-size-adjust: 100% !important;
+        text-size-adjust: 100% !important;
+      }
+      .fz-container {
+        background-color: beige;
+        padding: 5px;
+        width: 300px;
+        height: 100px;
+        line-height: 1.2;
+        font-size: 16px;
+      }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script>
+    <script>
+      // 初始化
+      var vConsole = new VConsole();
+    </script>
+    <script>
+        (function () {
+          if (
+            typeof WeixinJSBridge == "object" &&
+            typeof WeixinJSBridge.invoke == "function"
+          ) {
+            console.info("  WeixinJSBridge:", WeixinJSBridge);
+            handleFontSize();
+          } else {
+            document.addEventListener(
+              "WeixinJSBridgeReady",
+              handleFontSize,
+              false
+            );
+          }
+          function handleFontSize() {
+            console.info(" 7113 line ");
+            // 设置网页字体为默认大小
+            // WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
+            // 重写设置网页字体大小的事件
+            WeixinJSBridge.on("menu:setfont", function (aa,bb) {
+              console.info("menu:setfont  aa:", aa, " this:", this);
+              // WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
+              WeixinJSBridge.invoke("setBodyFontSizeCallback", { fontSize: 0 });
+            });
+          }
+        })();
+    </script>
+  </head>
+  <body>
+    45
+    <div class="fz-container">
+      因为缩放适配小屏幕而导致文字会变得很小，许多手机浏览器会使用文本溢出算法放大文本，改善可读性。当一个包含文本的元素使用了
+      100% 的屏幕宽度，该算法会增加文本大小，但是不会修改布局。text-size-adjust
+      这个属性允许开发者去除或者修改浏览器的这种行为，比如，当网页已经适配了小屏幕之后，就不需要这么做了。需要为想要实现的浏览器加上前缀。
+    </div>
+  </body>
+</html>
