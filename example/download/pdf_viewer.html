@@ -1,0 +1,47 @@
+<!--
+ * @Author: zhenghuahou 2430370966@qq.com
+ * @Date: 2025-05-22 15:01:26
+ * @LastEditors: zhenghuahou 2430370966@qq.com
+ * @LastEditTime: 2025-06-19 18:05:31
+ * @FilePath: /fe-notebook/example/download/input.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/pdfh5.css" />
+    <script src="js/pdf.js" type="text/javascript" charset="utf-8"></script>
+    <script
+      src="js/pdf.worker.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="js/jquery-3.6.0.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script src="js/pdfh5.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    111
+    <object data="/download/merged-xss.pdf" width="100%" heigh="100%"type="application/pdf"></object>
+    222
+    <div id="demo"></div>
+    <script>
+      var pdfh5 = new Pdfh5("#demo", {
+        pdfurl: "/download/merged-xss.pdf",
+        renderType:'canvas',
+        scale:1,
+        disableScripting:true,
+        pdfjs:{
+          disableScripting:true
+        }
+        // lazy:true
+      });
+    </script>
+  </body>
+</html>

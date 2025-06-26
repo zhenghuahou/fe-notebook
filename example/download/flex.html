@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        height: 2000px;
+        background-color: #360;
+      }
+      .flex {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .flex-container {
+        margin-top: 50px;
+        height: 500px;
+        display: flex;
+        flex-direction: column; /* 列方向布局 */
+        align-items: center;
+        justify-content: center;
+        position: relative; /* 如果需要作为定位上下文 */
+      }
+
+      .no-keyboard {
+        pointer-events: none;
+        /* 或者 */
+        user-select: none;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background: red;
+        margin-bottom: 20px;
+      }
+
+      .absolute-child {
+        position: absolute;
+        /* 绝对定位属性 */
+      }
+
+      .overlay {
+        text-align: center;
+        color: white;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        right: 0;
+        height: 200px;
+        /* bottom: 0; */
+        background: rgba(0, 0, 0, 1);
+      }
+      .text {
+        /* padding-top: 20px ; */
+        /* background-color: palegoldenrod; */
+      }
+    </style>
+  </head>
+  <body>
+    <br />
+    <br />
+    <input type="text" class="no-keyboard" placeholder="请输入内容" />
+    <br />
+    <br />
+    <br />
+    <input type="text" placeholder="请输入内容"  id="myInput"/>
+    <br />
+    <br />
+
+    <section class="container">
+      <div class="flex-container">
+        <div class="overlay"><p class="text">absolute-child</p></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </section>
+
+    <script>
+      // 替换输入框为可编辑div
+      const input = document.getElementById("myInput");
+      const div = document.createElement("div");
+      div.contentEditable = true;
+      div.className = "fake-input";
+      input.parentNode.replaceChild(div, input);
+
+      // 添加样式
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        `
+  <style>
+    .fake-input {
+      /* 样式模仿输入框 */
+      border: 1px solid #ccc;
+      padding: 8px;
+      background:red;
+      min-height: 20px;
+    }
+  </style>
+`
+      );
+    </script>
+  </body>
+</html>

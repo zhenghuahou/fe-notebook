@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <object data="/download/merged-xss.pdf" width="100%" heigh="100%"type="application/pdf"></object>
+
+    <script src="js/pdf.mjs" type="module"></script>
+
+    <script type="module">
+      // If absolute URL from the remote server is provided, configure the CORS
+      // header on that server.
+      var url = "/download/merged-xss.pdf";
+
+      // Loaded via <script> tag, create shortcut to access PDF.js exports.
+      var { pdfjsLib } = globalThis;
+
+      // The workerSrc property shall be specified.
+      pdfjsLib.GlobalWorkerOptions.workerSrc = "js/pdf.worker.mjs";
+
+      // Asynchronous download of PDF
+      var loadingTask = pdfjsLib.getDocument({
+        url,
+        verbosity: 4,
+        disableScripting: true, // 禁用PDF内JS
+        isEvalSupported: true, // 禁用eval
+      });
+
+      const pdfDoc = await loadingTask.promise;
+      const catalog = pdfDoc.catalog; // 获取Catalog实例
+      console.info(" catalog>>>>>:", catalog,' pdfDoc:',pdfDoc);
+
+      console.info(" loadingTask:", loadingTask);
+
+      loadingTask.promise.then(
+        async function (pdf) {
+          console.log("PDF loaded>>>>=====", pdf);
+          // const catalog = pdf.catalog;
+          // if (catalog?.openAction?.action === "JavaScript") {
+          //   const scriptCode = catalog.openAction.script;
+          //   console.log("OpenAction脚本:", scriptCode);
+          // }
+
+          const metadata = await pdf.getMetadata();
+          console.info(" metadata:", metadata);
+
+          // Fetch the first page
+          var pageNumber = 1;
+
+          pdf.getPage(pageNumber).then(async function (page) {
+            console.log("Page loaded page:::::::", page);
+
+            var scale = 1.5;
+            var viewport = page.getViewport({ scale: scale });
+
+            const textContent = await page.getTextContent();
+            console.info(" textContent", textContent);
+
+            const annotations = await page.getAnnotations();
+
+            console.info(" annotations", annotations);
+
+            const structTree = await page.getStructTree();
+            console.info(" structTree", structTree);
+
+            const jSActions = await page.getJSActions();
+            console.info(" jSActions", jSActions);
+
+            const operatorList = await page.getOperatorList();
+            console.info(" operatorList", operatorList);
+
+            // Prepare canvas using PDF page dimensions
+            var canvas = document.getElementById("the-canvas");
+            var context = canvas.getContext("2d");
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Render PDF page into canvas context
+            var renderContext = {
+              canvasContext: context,
+              viewport: viewport,
+            };
+
+            console.info("  renderContext:", renderContext);
+            var renderTask = page.render(renderContext);
+            window.page2 = page;
+            // renderTask.promise.then(function () {
+            //   console.log("Page rendered");
+            // });
+          });
+        },
+        function (reason) {
+          // PDF loading error
+          console.error(reason);
+        }
+      );
+    </script>
+
+    <h1>PDF.js 'Hello, world!' example</h1>
+
+    <p>
+      Please use
+      <a href="https://mozilla.github.io/pdf.js/getting_started/#download"
+        ><i>official releases</i></a
+      >
+      in production environments.
+    </p>
+
+    <canvas id="the-canvas"></canvas>
+  </body>
+</html>
