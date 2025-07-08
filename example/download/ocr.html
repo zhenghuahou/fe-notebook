@@ -4,10 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #log {
+        height: 320px;
+        overflow: scroll;
+        padding: 0.5rem;
+        border: 1px solid black;
+      }
+    </style>
     <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script>
     <script>
       // 初始化
-      var vConsole = new VConsole();
+      // var vConsole = new VConsole();
     </script>
     <script>
       window.addEventListener("error", function (event) {
@@ -21,9 +29,7 @@
     </script>
   </head>
   <body>
-    <p>navigator.permissions</p>
-    <p>navigator.mediaDevices</p>
-    ---------- 上传图片/拍照demo: 有caputer="user"属性
+    ---------- 上传图片/拍照demo: 有caputer="user"属性  (本地环境，可以拍照，可以选择相册文件，但是测试域名环境下只能拍照不能选择相册文件。测试环境和本地环境表现不一样)
     <input
       type="file"
       id="avatar1"
@@ -31,165 +37,30 @@
       accept="image/*"
       caputer="user"
     />
+    <br />
+    <br />
+    <br />
+
+    ---------- 上传图片/拍照demo: 有caputer="environment"属性
+    <input
+      type="file"
+      id="avatar1"
+      name="avatar1"
+      accept="image/*"
+      caputer="environment"
+    />
+
 
     <br />
     <br />
     <br />
-    没有caputer="user"属性
+    没有caputer="user"属性 (本地环境，可以拍照，也可以选择相册文件.测试环境域名也是可以拍照，也可以选择相册文件。测试环境和本地环境表现一样)
     <input type="file" id="avatar2" name="avatar2" accept="image/*" />
 
     <br />
     <br />
-    <br />
+
     capture="camera"
     <input type="file" id="cameraInput" accept="image/*" capture="camera" />
-
-    <script>
-      console.info('navigator.permissions:',navigator.permissions)
-      console.info('navigator.mediaDevices:',navigator.mediaDevices)
-
-      const input1 = document.getElementById("avatar1");
-      const input2 = document.getElementById("avatar2");
-      input1.addEventListener("click", (e) => {
-        console.info("[line38] [click] avatar1 e:", e);
-      });
-      input1.addEventListener("change", (e) => {
-        console.info("[line41] [change] avatar1 e:", e);
-      });
-
-      input1.addEventListener("error", (err) => {
-        console.error(
-          "[line45] [error]文件选择错误:",
-          err,
-          " error.message:",
-          error.message
-        );
-        alert("无法访问照片库，请检查权限设置");
-      });
-
-      input2.addEventListener("click", (e) => {
-        console.info("[line50] [click] avatar2 e:", e);
-      });
-
-      input2.addEventListener("change", (e) => {
-        console.info("[line54] [change] avatar1 e:", e);
-      });
-
-      input2.addEventListener("error", (err) => {
-        console.error(
-          "[line58] [error]文件选择错误:",
-          err,
-          " error.message:",
-          error.message
-        );
-        alert("无法访问照片库，请检查权限设置");
-      });
-
-      input1.click();
-
-      /**
-       * 检查摄像头权限状态
-       * @returns {Promise<boolean>} 返回是否授予摄像头权限
-       */
-      async function checkCameraPermission() {
-        console.info(" navigator.permissions:", navigator.permissions);
-        // 标准Permissions API检测（Chrome/Firefox/Edge）
-        if (navigator.permissions && navigator.permissions.query) {
-          try {
-            const status = await navigator.permissions.query({
-              name: "camera",
-            });
-            return status.state === "granted";
-          } catch (error) {
-            alert("error" + error.message);
-            // 部分浏览器不支持camera权限查询（如Safari）
-            return checkViaMediaDevices();
-          }
-        }
-
-        // 降级方案：通过mediaDevices API检测（可能触发权限弹窗）
-        return checkViaMediaDevices();
-      }
-
-      /**
-       * 通过mediaDevices API检测摄像头权限
-       * @returns {Promise<boolean>}
-       */
-      async function checkViaMediaDevices() {
-        console.info(" navigator.mediaDevices:", navigator.mediaDevices);
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          return false; // 完全不支持媒体设备
-        }
-
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-          });
-          // 立即关闭摄像头流
-          stream.getTracks().forEach((track) => track.stop());
-          return true;
-        } catch (error) {
-          return error.name === "NotAllowedError" ? false : false;
-        }
-      }
-
-      // 使用示例
-      checkCameraPermission().then(hasPermission => {
-        console.log('摄像头权限状态：', hasPermission ? '已授予' : '未授予');
-      });
-
-      // function checkFileAccess() {
-      //   return new Promise((resolve) => {
-      //     const fileInput = document.createElement("input");
-      //     fileInput.type = "file";
-      //     fileInput.style.display = "none";
-
-      //     let timer = setTimeout(() => {
-      //       document.body.removeChild(fileInput);
-      //       resolve(false); // 超时未响应，可能没有权限
-      //     }, 1000);
-
-      //     fileInput.addEventListener("change", () => {
-      //       clearTimeout(timer);
-      //       document.body.removeChild(fileInput);
-      //       resolve(true); // 用户选择了文件
-      //     });
-
-      //     document.body.appendChild(fileInput);
-      //     fileInput.click();
-      //   });
-      // }
-
-      // // 使用示例
-      // checkFileAccess().then((hasAccess) => {
-      //   if (!hasAccess) {
-      //     alert("请授予照片库访问权限以继续");
-      //     // 这里可以添加跳转到设置页面的代码
-      //   }
-      // });
-
-      // 检查相机权限
-      // navigator.permissions && navigator.permissions
-      //   .query({ name: "camera" })
-      //   .then((permissionStatus) => {
-      //     console.log("相机权限状态:", permissionStatus.state);
-      //     permissionStatus.onchange = () => {
-      //       console.log("相机权限状态变化:", permissionStatus.state);
-      //     };
-      //   });
-
-      // // 检查图片库权限（注意：并非所有浏览器都支持）
-      // navigator.permissions && navigator.permissions
-      //   .query({ name: "photo-library" })
-      //   .then((permissionStatus) => {
-      //     console.log("照片权限状态:", permissionStatus.state);
-      //     permissionStatus.onchange = () => {
-      //       console.log("照片权限状态变化:", permissionStatus.state);
-      //     };
-      //   })
-      //   .catch((err) => {
-      //     console.log("照片权限API不支持");
-      //   });
-    </script>
   </body>
 </html>

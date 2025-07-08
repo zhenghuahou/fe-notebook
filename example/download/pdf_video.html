@@ -29,15 +29,15 @@
     <br />
     <label for="avatar">Choose all (no accept):</label>
     <input type="file" id="videox" name="videox" accept="" />
-   
+
     <br />
-    <br/>
+    <br />
     --------<label for="avatar">image/* + capture camcorder:</label>
-    <input type="file" accept="image/*"  capture="camcorder"/>
-   
-    <br/>
+    <input type="file" accept="image/*" capture="camcorder" />
+
+    <br />
     --------<label for="avatar">image/* </label>
-    <input type="file" accept="image/*"  />
+    <input type="file" accept="image/*" />
 
     <br />
     <br />
@@ -47,6 +47,66 @@
       document.getElementById("textarea").oninput = function (aa) {
         console.info(" aa:", aa);
       };
+    </script>
+
+    <script>
+      // function test2() {
+      //   const promise1 = new Promise((resolve, reject) => {
+      //     setTimeout(resolve, 1000, "one by one");
+      //   });
+
+      //   const promise2 = new Promise((resolve, reject) => {
+      //     setTimeout(resolve, 2000, "2000 time out");
+      //   });
+
+      //   return Promise.race([promise1, promise2]);
+      // }
+
+      async function test() {
+        console.info("test 00", performance.now().toFixed(2));
+        try {
+          // const temp = test2();
+          console.info("test 11", performance.now().toFixed(2));
+
+          const promise1 = new Promise((resolve) => {
+            // setTimeout(reject, 1000, "one by one");
+            setTimeout(() => {
+              resolve(false+'promise1 one by one');
+              console.info("promise1 one by one");
+            }, 1000);
+          });
+
+          const promise2 = new Promise((resolve) => {
+            // setTimeout(resolve, 2000, "2000 time out");
+            setTimeout(() => {
+              resolve(false);
+              console.info("promise2 2s超时了");
+            }, 2000);
+          });
+
+          const rst = await Promise.race([promise1, promise2]);
+
+          console.info(" rst:", rst, performance.now().toFixed(2));
+          // return rst;
+          // return (await temp,alert(234),4) // 多加一个await
+          // await Promise.reject(new Error('错误'));
+          console.info("test 22", performance.now().toFixed(2));
+          // 这个错误不会被捕获
+          return rst;
+        } catch (error) {
+          console.log(
+            "promise rejct就会执行到这儿",
+            error,
+            performance.now().toFixed(2)
+          );
+          // return 'catch return'
+        }
+        console.info("test 33", performance.now().toFixed(2));
+        return "last line 29";
+      }
+
+      var a = test();
+      console.info("a:", a, performance.now().toFixed(2));
     </script>
   </body>
 </html>
