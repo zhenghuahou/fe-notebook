@@ -6,18 +6,19 @@
     <title>Document</title>
   </head>
   <body>
-    <label for="avatar"
-      >Choose a profile picture(application/pdf):</label
-    >
+    <label for="avatar">Choose accept(video/*) + capture(camcorder):</label>
+    <input type="file" accept="video/*" capture="camcorder" />
+    <br />
+    <label for="avatar">Choose a profile picture(application/pdf):</label>
     <input type="file" id="avatar" name="avatar" accept="application/pdf" />
     <br />
     application/pdf,image/*
     <input type="file" accept="application/pdf,image/*" multiple />
-    <br/>
+    <br />
     --------<label for="avatar">image/* </label>
-    <input type="file" accept="image/*"  multiple />
-    <br/>
+    <input type="file" accept="image/*" multiple />
+    <br />
     --------<label for="avatar">.bmp/.gif</label>
-    <input type="file" accept=".bmp,.gif"  multiple />
+    <input type="file" accept=".bmp,.gif" multiple />
   </body>
 </html>

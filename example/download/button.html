@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="myForm" onsubmit="alert('表单被提交了！'); return false;">
+      <input type="text" placeholder="在这里按回车" />
+      <!-- 默认 type="submit" -->
+      <button onclick="alert('提交按钮被点击了！')">提交按钮</button>
+      <!-- 明确声明 type="button" -->
+      <button type="button" onclick="alert('普通按钮被点击了！')">
+        普通按钮
+      </button>
+    </form>
+  </body>
+</html>

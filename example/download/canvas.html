@@ -6,6 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script>
+      // let a = {
+      //   [Symbol.toPrimitive]: ((i) => () => {
+      //     let rst = ++i;
+      //     console.info(" i:", i, " rst:", rst);
+      //     return rst;
+      //   })(0),
+      // };
+      // if (a == 1 && a == 2) {
+      //   console.log("1%%1");
+      // }
+
+      // let a = {
+      //   i: 1,
+      //   valueOf() {
+      //     console.info('a.i:',a.i)
+      //     return a.i++;
+      //   },
+      //   toString(){
+      //     console.info(' abd')
+      //     return 'abd'
+      //   }
+      // };
+      // if (a == 1 && a == 2 && a == 3) {
+      //   console.log("1");
+      // }
+
+      let a = {
+        gn: (function* () {
+          console.info(" 1ii", this); //this为widnow
+          yield 1;
+          console.info(" 2ii", this);
+          yield 2;
+          console.info(" 3ii", this);
+          yield 3;
+          console.info(" 4ii", this);
+        })(),
+        valueOf() {
+          let rst = this.gn.next();
+          // this ===a // true
+          console.info(" test:", this, "this ===a:", this === a, "rst:", rst);
+          return rst.value;
+        },
+      };
+      if (a == 1 && a == 2 && a == 3) {
+        console.log(1);
+      }
       // window.onerror = function (
       //   errorMessage,
       //   scriptURI,
@@ -45,10 +91,37 @@
       );
     </script>
     <link rel="stylesheet" href="aa.css" />
+    <style>
+      body {
+        /* background-color: red; */
+      }
+      .test {
+        width: 315px;
+        height: 496px;
+        background: url("./assets/bg.webp") left top no-repeat;
+        background-size: contain;
+      }
+    </style>
   </head>
   <body>
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- 定义模糊滤镜 -->
+      <filter id="blur_filter">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+      </filter>
+      <!-- 应用滤镜的矩形 -->
+      <rect
+        x="50"
+        y="50"
+        id="blur_filter2"
+        width="200"
+        height="40"
+        fill="yellow"
+        filter="url(#blur_filter)"
+      />
+    </svg>
+    <div class="test"></div>
     <video controls></video>
-
     toBlob test huazi
     <canvas id="canvas"></canvas>
     <input type="file" />
