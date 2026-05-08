@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<!--
+ * @Author: zhenghuahou 2430370966@qq.com
+ * @Date: 2025-05-22 15:01:26
+ * @LastEditors: zhenghuahou 2430370966@qq.com
+ * @LastEditTime: 2026-03-12 18:39:22
+ * @FilePath: /fe-notebook/example/download/fontSize.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,6 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
       html {
         -webkit-text-size-adjust: 100% !important;
         -moz-text-size-adjust: 100% !important;
@@ -19,6 +31,28 @@
         line-height: 1.2;
         font-size: 16px;
       }
+      .test-container {
+        background-color: aquamarine;
+        padding: 20px;
+        transform: translate(0px, 100px);
+        
+      }
+      .inner-container {
+        background-color: yellow;
+        padding: 20px;
+        height: 100px;
+        width: 100px;
+        transform: translate(100px, 0px);
+      }
+      .fixed-p {
+        position: fixed;
+        left: 10px;
+        left:0;
+        top: 0;
+        width: 100px;
+        height: 50px;
+        background-color: red;
+      }
     </style>
     <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.15.0/vconsole.min.js"></script>
     <script>
@@ -26,40 +60,46 @@
       var vConsole = new VConsole();
     </script>
     <script>
-        (function () {
-          if (
-            typeof WeixinJSBridge == "object" &&
-            typeof WeixinJSBridge.invoke == "function"
-          ) {
-            console.info("  WeixinJSBridge:", WeixinJSBridge);
-            handleFontSize();
-          } else {
-            document.addEventListener(
-              "WeixinJSBridgeReady",
-              handleFontSize,
-              false
-            );
-          }
-          function handleFontSize() {
-            console.info(" 7113 line ");
-            // 设置网页字体为默认大小
+      (function () {
+        if (
+          typeof WeixinJSBridge == "object" &&
+          typeof WeixinJSBridge.invoke == "function"
+        ) {
+          console.info("  WeixinJSBridge:", WeixinJSBridge);
+          handleFontSize();
+        } else {
+          document.addEventListener(
+            "WeixinJSBridgeReady",
+            handleFontSize,
+            false,
+          );
+        }
+        function handleFontSize() {
+          console.info(" 7113 line ");
+          // 设置网页字体为默认大小
+          // WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
+          // 重写设置网页字体大小的事件
+          WeixinJSBridge.on("menu:setfont", function (aa, bb) {
+            console.info("menu:setfont  aa:", aa, " this:", this);
             // WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
-            // 重写设置网页字体大小的事件
-            WeixinJSBridge.on("menu:setfont", function (aa,bb) {
-              console.info("menu:setfont  aa:", aa, " this:", this);
-              // WeixinJSBridge.invoke("setFontSizeCallback", { fontSize: 0 });
-              WeixinJSBridge.invoke("setBodyFontSizeCallback", { fontSize: 0 });
-            });
-          }
-        })();
+            WeixinJSBridge.invoke("setBodyFontSizeCallback", { fontSize: 0 });
+          });
+        }
+      })();
     </script>
   </head>
   <body>
-    45
     <div class="fz-container">
       因为缩放适配小屏幕而导致文字会变得很小，许多手机浏览器会使用文本溢出算法放大文本，改善可读性。当一个包含文本的元素使用了
       100% 的屏幕宽度，该算法会增加文本大小，但是不会修改布局。text-size-adjust
       这个属性允许开发者去除或者修改浏览器的这种行为，比如，当网页已经适配了小屏幕之后，就不需要这么做了。需要为想要实现的浏览器加上前缀。
+    </div>
+
+    <div class="test-container">
+      test-container
+      <div class="inner-container">
+        <p class="fixed-p">position: fixed; 元素</p>
+      </div>
     </div>
   </body>
 </html>

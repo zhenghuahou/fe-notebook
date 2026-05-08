@@ -94,3 +94,25 @@ const ObjSatisfies = {
 } satisfies Obj;
 
 ObjSatisfies.c = 12;
+
+function test() {
+  const rst = new Promise((resolve, reject) => {
+    console.info(" test rst");
+  });
+
+  console.info("rst:", rst);
+  return rst;
+}
+
+async function demo() {
+  try {
+    await test();
+  } catch (exceptionVar) {
+    console.log(' exceptionVar',exceptionVar)
+  } finally {
+    console.log(' finallyStatements')
+  }
+}
+
+
+demo();

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue3 表单自动化测试页面</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .form-automation-demo {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    h1 {
+      text-align: center;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #409eff;
+      box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.15);
+    }
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .radio-group label,
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .btn-primary,
+    .btn-secondary {
+      flex: 1;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #409eff, #66b1ff);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(64, 158, 255, 0.4);
+    }
+    .btn-secondary {
+      background: #909399;
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: #a6a9ad;
+    }
+    .preview-section {
+      margin-top: 30px;
+      background: #f5f7fa;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .preview-section h2 {
+      color: #606266;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .preview-section pre {
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 13px;
+      border: 1px solid #e4e7ed;
+    }
+    .form-title {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #409eff;
+      margin-bottom: 25px;
+    }
+    .form-title h2 {
+      color: #409eff;
+      margin: 0;
+    }
+    /* 自动化测试标识 */
+    [data-autofill] {
+      border: 2px dashed #f56c6c !important;
+      position: relative;
+    }
+    [data-autofill]::after {
+      content: 'AUTOFILL';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #f56c6c;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="form-automation-demo">
+      <div class="form-title">
+        <h2>用户预审批表单</h2>
+      </div>
+      
+      <form id="preApproveForm" @submit.prevent="handleSubmit">
+        <!-- 用户名 -->
+        <div class="form-group">
+          <label for="username">用户名 *</label>
+          <input 
+            type="text" 
+            id="username" 
+            data-field="username"
+            v-model="formData.username" 
+            placeholder="请输入用户名"
+            required
+          />
+        </div>
+
+        <!-- 邮箱 -->
+        <div class="form-group">
+          <label for="email">邮箱 *</label>
+          <input 
+            type="email" 
+            id="email" 
+            data-field="email"
+            v-model="formData.email" 
+            placeholder="请输入邮箱"
+            required
+          />
+        </div>
+
+        <!-- 手机号 -->
+        <div class="form-group">
+          <label for="phone">手机号</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            data-field="phone"
+            v-model="formData.phone" 
+            placeholder="请输入手机号"
+          />
+        </div>
+
+        <!-- 性别 -->
+        <div class="form-group">
+          <label>性别</label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="gender" value="male" data-field="gender" v-model="formData.gender" />
+              男
+            </label>
+            <label>
+              <input type="radio" name="gender" value="female" data-field="gender" v-model="formData.gender" />
+              女
+            </label>
+          </div>
+        </div>
+
+        <!-- 部门 -->
+        <div class="form-group">
+          <label for="department">部门</label>
+          <select id="department" data-field="department" v-model="formData.department">
+            <option value="">请选择部门</option>
+            <option value="tech">技术部</option>
+            <option value="product">产品部</option>
+            <option value="design">设计部</option>
+            <option value="operation">运营部</option>
+          </select>
+        </div>
+
+        <!-- 技能 -->
+        <div class="form-group">
+          <label>技能 (可多选)</label>
+          <div class="checkbox-group">
+            <label>
+              <input type="checkbox" value="js" data-field="skills" v-model="formData.skills" />
+              JavaScript
+            </label>
+            <label>
+              <input type="checkbox" value="vue" data-field="skills" v-model="formData.skills" />
+              Vue.js
+            </label>
+            <label>
+              <input type="checkbox" value="react" data-field="skills" v-model="formData.skills" />
+              React
+            </label>
+            <label>
+              <input type="checkbox" value="node" data-field="skills" v-model="formData.skills" />
+              Node.js
+            </label>
+          </div>
+        </div>
+
+        <!-- 申请理由 -->
+        <div class="form-group">
+          <label for="reason">申请理由</label>
+          <textarea 
+            id="reason" 
+            data-field="reason"
+            v-model="formData.reason" 
+            rows="4"
+            placeholder="请输入申请理由"
+          ></textarea>
+        </div>
+
+        <!-- 提交按钮 -->
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">提交审批</button>
+          <button type="button" class="btn-secondary" @click="resetForm">重置</button>
+        </div>
+      </form>
+
+      <!-- 数据预览 -->
+      <div class="preview-section">
+        <h2>📋 表单数据预览</h2>
+        <pre id="formPreview">{{ JSON.stringify(formData, null, 2) }}</pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, reactive } = Vue
+
+    createApp({
+      setup() {
+        const formData = reactive({
+          username: '',
+          email: '',
+          phone: '',
+          gender: '',
+          department: '',
+          skills: [],
+          reason: ''
+        })
+
+        const handleSubmit = () => {
+          console.log('表单提交:', formData)
+          alert('表单已提交!\n\n' + JSON.stringify(formData, null, 2))
+        }
+
+        const resetForm = () => {
+          Object.assign(formData, {
+            username: '',
+            email: '',
+            phone: '',
+            gender: '',
+            department: '',
+            skills: [],
+            reason: ''
+          })
+        }
+
+        return {
+          formData,
+          handleSubmit,
+          resetForm
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

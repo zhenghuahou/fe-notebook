@@ -2,19 +2,24 @@
  * @Author: zhenghuahou 2430370966@qq.com
  * @Date: 2025-05-22 15:01:26
  * @LastEditors: zhenghuahou 2430370966@qq.com
- * @LastEditTime: 2025-06-12 10:04:05
+ * @LastEditTime: 2026-03-25 17:58:21
  * @FilePath: /fe-notebook/bin/crypto copy.mjs
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { SM2 } from "gm-crypto";
 import { appendFileSync } from "node:fs";
 
+// python 导入`ChatOpenAI`类
+// from langchain_openai import ChatOpenAI
+
+
 // sm-crypto
 //订单参数
 const p = {
-  coOrderId: "20250612P1011001", //车方金融单号
-  stagingIdChannel: "ST032025061200006", //农业银行分期订单号，申请接口调用成功后会返回
+  coOrderId: "3780779953193222170", //车方金融单号
+  stagingIdChannel: "ST032026032500013", //农业银行分期订单号，申请接口调用成功后会返回
 };
+//ST032026031900005
 
 //SM2公钥
 const SM2_PUBLIC_KEY =

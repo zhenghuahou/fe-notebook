@@ -1,0 +1,224 @@
+/* CSS 三角箭头实现方法 */
+
+/* 方法1: 使用 border 实现三角形 */
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #333;
+}
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid #333;
+}
+
+.triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 15px solid #333;
+}
+
+.triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #333;
+}
+
+/* 方法2: 使用 CSS clip-path 实现 */
+.clip-triangle-up {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.clip-triangle-down {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+}
+
+.clip-triangle-left {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+}
+
+.clip-triangle-right {
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
+}
+
+/* 方法3: 使用伪元素 ::before 或 ::after */
+.arrow-container {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin: 10px;
+}
+
+.arrow-container.arrow-top::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #f0f0f0;
+}
+
+.arrow-container.arrow-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #f0f0f0;
+}
+
+/* 方法4: 使用 transform rotate 实现 */
+.rotate-arrow {
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #333;
+  border-right: 2px solid #333;
+  display: inline-block;
+  margin: 10px;
+}
+
+.rotate-arrow.up {
+  transform: rotate(-45deg);
+}
+
+.rotate-arrow.down {
+  transform: rotate(135deg);
+}
+
+.rotate-arrow.left {
+  transform: rotate(-135deg);
+}
+
+.rotate-arrow.right {
+  transform: rotate(45deg);
+}
+
+/* 方法5: 使用 Unicode 字符 */
+.unicode-arrow {
+  font-size: 20px;
+  color: #333;
+  margin: 10px;
+}
+
+.unicode-arrow.up::before {
+  content: '▲';
+}
+
+.unicode-arrow.down::before {
+  content: '▼';
+}
+
+.unicode-arrow.left::before {
+  content: '◀';
+}
+
+.unicode-arrow.right::before {
+  content: '▶';
+}
+
+/* 方法6: 可交互的箭头按钮 */
+.arrow-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.arrow-button:hover {
+  transform: scale(1.2);
+}
+
+.arrow-button .arrow {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid #007bff;
+  transition: border-color 0.3s ease;
+}
+
+.arrow-button:hover .arrow {
+  border-bottom-color: #0056b3;
+}
+
+/* 响应式三角箭头 */
+.responsive-arrow {
+  width: 0;
+  height: 0;
+  border-left: 1vw solid transparent;
+  border-right: 1vw solid transparent;
+  border-bottom: 1.5vw solid #333;
+}
+
+/* 动画三角箭头 */
+.animated-arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #333;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 渐变色三角箭头 */
+.gradient-arrow {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* 阴影效果三角箭头 */
+.shadow-arrow {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid #333;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
