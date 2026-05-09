@@ -160,3 +160,13 @@ git show 807eb3e9f7296b6f7612e84fc991d47feee57140
 ![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)
+
+
+
+
+##### git不常用的命令
+```bash
+#这条 Git 命令用于统计指定分支（dev）所包含的所有 Git 对象占用的磁盘空间，并以人类易读的格式（如 KB、MB）显示结果。
+git rev-list --disk-uage-human --objects dev
+
+```
