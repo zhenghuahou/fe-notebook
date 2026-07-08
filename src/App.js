@@ -6,21 +6,21 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Basic, { routeConfig } from "./pages/basic";
-import ReactPractice, {
-  routeConfig as ReactPracticeRouteConfig,
-} from "./pages/react";
-import Performance, {
-  routeConfig as PerformanceRouteConfig,
-} from "./pages/react";
-import Engineering, {
-  routeConfig as EngineeringRouteConfig,
-} from "./pages/engineering";
-import Program, { routeConfig as ProgramRouteConfig } from "./pages/program";
-import Algorithm, {
-  routeConfig as AlgorithmRouteConfig,
-} from "./pages/algorithm";
-import Network, { routeConfig as NetworkRouteConfig } from "./pages/network";
+
+import Basic, { routeConfig } from './pages/basic'
+import ReactPractice, { routeConfig as ReactPracticeRouteConfig } from './pages/react'
+import Performance, { routeConfig as PerformanceRouteConfig } from './pages/react'
+import Engineering, { routeConfig as EngineeringRouteConfig } from './pages/engineering'
+import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
+import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
+import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
+import A from './formilyDemo';
+
+
+
+export const FormContext = React.createContext(null)
+console.info(' FormContext:',FormContext,'typeof FormContext:',typeof FormContext);
+
 
 const routerCfg = [
   {

@@ -1,4 +1,4 @@
-import Highlight from '../../components/highlight';
+import Highlight from "../../components/highlight";
 
 export default function New() {
   const code = `
@@ -28,27 +28,18 @@ export default function New() {
   createObj(test2) // test2{}
   createObj(test3) // []
   createObj(test4) // /b/
-  `
-  return <>
-    <h3>
-      new 关键字会进行如下的操作：
-    </h3>
-    <p>
-      1. 创建一个空的简单 JavaScript 对象（即 { }）；
-    </p>
-    <p>
-      2. 为步骤 1 新创建的对象添加属性 __proto__，将该属性链接至构造函数的原型对象；
-    </p>
-    <p>
-      3. 将步骤 1 新创建的对象作为 this 的上下文；
-    </p>
-    <p>
-      4. 如果该函数没有返回对象，则返回 this。
-    </p>
-    <Highlight className="code">
-      {code}
-    </Highlight>
-  </>
+  `;
+  return (
+    <>
+      <h3>new 关键字会进行如下的操作：</h3>
+      <p>1. 创建一个空的简单 JavaScript 对象（即 {}）；</p>
+      <p>
+        2. 为步骤 1 新创建的对象添加属性
+        __proto__，将该属性链接至构造函数的原型对象；
+      </p>
+      <p>3. 将步骤 1 新创建的对象作为 this 的上下文；</p>
+      <p>4. 如果该函数没有返回对象，则返回 this。</p>
+      <Highlight className="code">{code}</Highlight>
+    </>
+  );
 }
-
-

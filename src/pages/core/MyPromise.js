@@ -221,3 +221,15 @@ function test() {
 }
 
 test();
+
+const test1 = new Promise((resolve, reject) => {
+  resolve("success");
+})
+  .then(
+    (res) => console.log("res"),
+    (err) => console.log("err:", err)
+  )
+  .then(
+    (res) => console.log("res"),
+    (err) => console.log("err:", err)
+  );

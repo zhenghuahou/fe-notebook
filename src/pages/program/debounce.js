@@ -205,12 +205,12 @@ window.addEventListener("load", function () {
     this.innerHTML = count++;
   }
 
-  container1 && (container1.onmousemove = getUserAction);
+  container1 &&(container1.onmousemove = getUserAction);
 
   container2 && (container2.onmousemove = debounceA(getUserAction, 1000));
 
-  container3 && (container3.onmousemove = debounceB(getUserAction, 3000, true));
+  container3 &&(container3.onmousemove = debounceB(getUserAction, 3000, true));
 
-  container4 && (container4.onmousemove = debounce(getUserAction, 3000, true));
+  container4 &&(container4.onmousemove = debounce(getUserAction, 3000, true));
   container5 && (container5.onmousemove = debounce(getUserAction, 3000));
 });

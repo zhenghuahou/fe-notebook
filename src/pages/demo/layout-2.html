@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>圣杯布局&水平垂直居中&&扇形布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 2000px;
+      }
+      .container {
+        height: 200px;
+        padding-left: 100px;
+        padding-right: 200px;
+        background-color: aqua;
+      }
+      .center {
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: gray;
+      }
+      .left {
+        position: relative;
+        left: -100px;
+        float: left;
+        margin-left: -100%;
+        width: 100px;
+        height: 200px;
+        background-color: brown;
+      }
+      .right {
+        position: relative;
+        left: 200px;
+        /* float: right; */
+        float: left;
+        margin-left: -200px;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(95, 42, 165);
+      }
+      .container2 .left {
+        margin-right: -100%;
+        margin-left: 0;
+      }
+      .mc {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: blue;
+        margin: auto;
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="center">center</div>
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </div>
+    <br />
+    <div class="container container2">
+      <div class="left">left</div>
+      <div class="center">center</div>
+      <div class="right">right</div>
+    </div>
+    <!-- <div class="mc"></div> -->
+
+    <style>
+      #div {
+        margin-top: 200px;
+        margin-left: 200px;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        /* background-color: aqua; */
+        overflow: hidden;
+      }
+      #circle {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        /* background: blue; */
+        overflow: hidden;
+      }
+      #d1 {
+        transform: skewX(135deg);
+        transform: skewX(-45deg);
+        transform-origin: 0 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: red;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+    <div id="div">
+      <div id="circle">
+        <div id="d1"></div>
+      </div>
+    </div>
+    <style>
+      .flex {
+        display: flex;
+        margin: 100px auto;
+        justify-content: space-between;
+        align-items: center;
+        width: 300px;
+      }
+      /* .a-up {
+        width: 0;
+        height: 0;
+        border-width: 0px 30px 30px 30px;
+        border-style: solid;
+        border-color: blue yellow skyblue;
+      } */
+      .a-up {
+        width: 0;
+        height: 0;
+        border-top: 50px solid skyblue;
+        /* border-left: 50px solid transparent; */
+        border-right: 50px solid transparent;
+      }
+      .a-down {
+        width: 0;
+        height: 0;
+        border-bottom: 50px solid skyblue;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+      }
+      .a-left {
+        width: 0;
+        height: 0;
+        border-left: 50px solid skyblue;
+        border-top: 50px solid transparent;
+        border-bottom: 50px solid transparent;
+      }
+      .a-right {
+        width: 0;
+        height: 0;
+        border-right: 50px solid skyblue;
+        border-top: 50px solid transparent;
+        border-bottom: 50px solid transparent;
+      }
+    </style>
+    <div class="flex">
+      <div class="a-up"></div>
+      <div class="a-down"></div>
+      <div class="a-left"></div>
+      <div class="a-right"></div>
+    </div>
+    <style>
+      .clip-path {
+        margin: 100px;
+        width: 160px;
+        height: 200px;
+        /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+        clip-path: polygon(0 0, 0% 100%, 100% 50%);
+        /* clip-path: polygon(
+          50% 2.4%,
+          34.5% 33.8%,
+          0% 38.8%,
+          25% 63.1%,
+          19.1% 97.6%
+        ); */
+        background-color: red;
+      }
+    </style>
+    <div class="clip-path"></div>
+  </body>
+</html>

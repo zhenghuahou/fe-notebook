@@ -4,6 +4,7 @@ import Curry from './curry'
 import NumFormat from './numFormat'
 import Throttle from './throttle'
 import Debounce from './debounce'
+import Shuffle from './shuffle'
 
 const genConfig = function () {
     const config = [
@@ -35,7 +36,13 @@ const genConfig = function () {
             path: "Debounce",
             element: <Debounce />,
             title: '函数防抖'
-        }
+        },
+        {
+            path: "Shuffle",
+            element: <Shuffle />,
+            title: '随机打乱数组顺序'
+        },
+        
     ];
 
     config.map(item => {

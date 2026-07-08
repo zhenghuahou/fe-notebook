@@ -3,21 +3,20 @@
 export default function ShadowDOM() {
   return (
     <>
-      <p>
-        创建 shadow DOM 结构
-      </p>
+      <p>创建 shadow DOM 结构</p>
       <popup-info
         img="https://mdn.github.io/web-components-examples/popup-info-box-external-stylesheet/img/alt.png"
-        data-text="Your card validation code (CVC) is an extra security feature — it is the last 3 or 4 numbers on the back of your card."></popup-info>
+        data-text="Your card validation code (CVC) is an extra security feature — it is the last 3 or 4 numbers on the back of your card."
+      ></popup-info>
     </>
-  )
+  );
 }
 
 (function () {
   class MyWebComponent extends HTMLElement {
     constructor() {
       super();
-      const shadow = this.attachShadow({ mode: 'open' });
+      const shadow = this.attachShadow({ mode: "open" });
 
       // Create spans
       const wrapper = document.createElement("span");
@@ -31,19 +30,17 @@ export default function ShadowDOM() {
       setTimeout(() => {
         // Take attribute content and put it inside the info span
         const text = this.getAttribute("data-text");
-        console.info('text:', text, '## 2:', this.getAttribute("data-text"));
+        console.info("text:", text, "## 2:", this.getAttribute("data-text"));
         info.textContent = text;
-      })
+      });
 
       // Insert icon
       const img = document.createElement("img");
-      console.info(' this.hasAttribute("img"):', this.hasAttribute("img"))
+      console.info(' this.hasAttribute("img"):', this.hasAttribute("img"));
       img.src = this.hasAttribute("img")
         ? this.getAttribute("img")
         : "https://mdn.github.io/web-components-examples/popup-info-box-external-stylesheet/img/alt.png";
-      img.alt = this.hasAttribute("alt")
-        ? this.getAttribute("alt")
-        : "";
+      img.alt = this.hasAttribute("alt") ? this.getAttribute("alt") : "";
       icon.appendChild(img);
 
       let style = document.createElement("style");

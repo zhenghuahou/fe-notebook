@@ -87,18 +87,18 @@ string:<li><a href="<%=www.baidu.com%>"><%=baidu%></a></li>
 //   console.log('string:',string);
 // })
 
-console.log("aaabc".replace(/a+/g, function(){
-  //执行1次，替换候的文本为'dbc'
-  console.info('+ arg:',arguments)
-  return 'd'
-}));
+// console.log("aaabc".replace(/a+/g, function(){
+//   //执行1次，替换候的文本为'dbc'
+//   console.info('+ arg:',arguments)
+//   return 'd'
+// }));
 
 
-console.log("aaabc".replace(/a+?/g, function(){
-  //执行3次，替换候的文本为'dddbc'
-  console.info('+? arg:',arguments)
-  return 'd'
-}));
+// console.log("aaabc".replace(/a+?/g, function(){
+//   //执行3次，替换候的文本为'dddbc'
+//   console.info('+? arg:',arguments)
+//   return 'd'
+// }));
 
 
 /* 非惰性匹配
@@ -106,18 +106,18 @@ console.log("aaabc".replace(/a+?/g, function(){
 非惰性匹配 match: <%=www.baidu.com%>
 非惰性匹配 match: <%=baidu%>
 */
-var str2 = '<li><a href="<%=www.baidu.com%>"><%=baidu%></a></li>'
-str2.replace(/<%=(.+?)%>/g, function(match){
-    console.log('非惰性匹配 match:',match);
-})
+// var str2 = '<li><a href="<%=www.baidu.com%>"><%=baidu%></a></li>'
+// str2.replace(/<%=(.+?)%>/g, function(match){
+//     console.log('非惰性匹配 match:',match);
+// })
 
 /* 惰性匹配
 输出结果:
 惰性匹配 match: <%=www.baidu.com%>"><%=baidu%>
 */
-var str3 = '<li><a href="<%=www.baidu.com%>"><%=baidu%></a></li>'
-str3.replace(/<%=(.+)%>/g, function(match){
-    console.log('惰性匹配 match:',match);
-})
+// var str3 = '<li><a href="<%=www.baidu.com%>"><%=baidu%></a></li>'
+// str3.replace(/<%=(.+)%>/g, function(match){
+//     console.log('惰性匹配 match:',match);
+// })
 
 

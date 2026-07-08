@@ -1,4 +1,4 @@
-import Highlight from '../../components/highlight';
+import Highlight from "../../components/highlight";
 export default function NumFormat() {
   const code = `
   function numFormat(num){
@@ -14,16 +14,15 @@ export default function NumFormat() {
   var b=673439.4542;
   console.log(numFormat(a)); // "1,234,567,894,532"
   console.log(numFormat(b)); // "673,439.4542"
-  `
+  `;
   return (
     <>
-      <a href='https://www.jianshu.com/p/928c68f92c0c'>参考网址</a><br />
+      <a href="https://www.jianshu.com/p/928c68f92c0c">参考网址</a>
+      <br />
       <hr />
-      <Highlight className="code">
-        {code}
-      </Highlight>
+      <Highlight className="code">{code}</Highlight>
     </>
-  )
+  );
 }
 
 /*
@@ -40,5 +39,3 @@ var b=673439.4542;
 console.log(numFormat(a)); // "1,234,567,894,532"
 console.log(numFormat(b)); // "673,439.4542"
 */
-
-

@@ -34,4 +34,15 @@
 - . 如果有一个 Promise 成功，则返回这个成功结果；
 - . 如果所有 Promise 都失败，则报错；
 
+### async/await
+
+- await 只能在 async 函数中使用，不然会报错；
+- async 函数返回的是一个 Promise 对象，有无值看有无 return 值；
+- async/await 作用是用同步方式，执行异步操作
+- async/await 是一种语法糖，用到的是 ES6 里的迭代函数——generator 函数
+
+### generator
+
+yield 表达式本身没有返回值，或者说总是返回 undefined。next 方法可以带一个参数，该参数就会被当作上一个 yield 表达式的返回值。
+
 [Promise 对象详解](https://es6.ruanyifeng.com/#docs/promise#Promise-race)
