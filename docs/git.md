@@ -50,7 +50,9 @@ git reset --hard HEAD^
 
 ```bash
 # 方法一 :
-# To not track the remote 从远端bar分支检出本地分支foo,但是foo分支不跟踪远端bar分支
+# To not track the remote 从远端bar分支检出本地分支foo,但是foo分支不跟踪远
+
+端bar分支
 git checkout -b foo --no-track origin/bar
 
 # 方法二: 从远端origin/dev 检出本地分支local，并自动跟踪远端origin/dev分支
@@ -156,3 +158,5 @@ git log origin/feature/detail
 # git 查看某一条提交记录的日志消息和文本diff
 git show 807eb3e9f7296b6f7612e84fc991d47feee57140
 ```
+
+
