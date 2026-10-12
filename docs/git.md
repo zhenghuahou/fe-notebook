@@ -1,5 +1,6 @@
 ### 切换 git 源
 
+
 ```bash
 git remote set-url origin [remote_address]
 ```
@@ -111,7 +112,13 @@ the name of your current branch. To push to the upstream branch
 on the remote, use`
 
 ```bash
+# git push <远端名> <本地分支>:<远端分支>
+# 把本地当前分支推送到 origin 远端的 dev 分支：
 git push origin HEAD:dev
+
+# 把当前所在的提交 HEAD 推送到远程仓库 origin 的 demo/shared 分支。
+git push origin HEAD:demo/shared
+
 ```
 
 To push to the branch of the same name on the remote, use

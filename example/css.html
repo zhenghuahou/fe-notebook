@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue3 多选组件演示</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --color: #360;
+      }
+
+      .card {
+        --color: yellow; /* 只在 .card 及其子元素生效 */
+      }
+
+      .card p {
+        color: var(--color); /* 使用 yellow */
+      }
+
+      .text {
+        color: var(--color);
+      }
+    </style>
+  </head>
+  <body>
+    <p>我是黑色</p>
+    <div class="card">
+      card(黑色)
+      <p>【card】我是yellow</p>
+      <span>【card】我是什么颜色(黑色)</span>
+      <span class="text">【card】我是什么颜色(yellow)</span>
+    </div>
+    <span class="text">我是什么颜色(#360)</span>
+  </body>
+</html>
